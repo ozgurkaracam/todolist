@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container mt-4">
+    <div class="row">
+      <div class="col-md-4">
+        <Category v-on:selectedCategory="selectCategory" :newtodo="newtodo" />
+      </div>
+      <div class="col-md-8">
+        <Deneme v-bind:selectedCategory="selectedCategory" v-on:newtodo="addtodo" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Deneme from "./components/Deneme.vue";
+import Category from "./components/Category";
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Deneme,
+    Category
+  },
+  data(){
+    return{
+        selectedCategory:{},
+        newtodo:''
+    }
+  },
+  methods:{
+    selectCategory(value){
+        this.selectedCategory=value;
+    },
+    addtodo(value){
+        this.newtodo=value
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
